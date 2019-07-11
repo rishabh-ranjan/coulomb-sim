@@ -6,5 +6,5 @@ Dependencies: pygame
 
 Example run: `python3 sim.py < demo/sun.in`
 
-or `./sim.py < demo/grid.in'
+or `./sim.py < demo/grid.in`
 
