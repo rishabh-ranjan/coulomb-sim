@@ -51,7 +51,7 @@ class Particle:
     def draw(self, screen):
         if not self.alive:
             return
-        scr = (int(self.x * scale_x2px), int(self.y * scale_y2px))
+        scr = (round(self.x * scale_x2px), round(self.y * scale_y2px))
         pygame.draw.circle(screen, self.color, scr, particle_radius, particle_thickness)
 
 # list of particles
@@ -68,7 +68,7 @@ def input_particles():
     while True:
         try:
             inp = map(float, input().split())
-        except (EOFError, ValueError):
+        except:
             break
         particles.append(Particle(*inp))
 
