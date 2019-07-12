@@ -18,8 +18,8 @@ max_y = 100
 scale_x2px = screen_width / max_x
 scale_y2px = screen_height / max_y
 
-# frames per second for drawing
-fps = 24
+# wanted frames per second for drawing
+fps = 100
 
 # default particle properties
 radius = 2 # px
@@ -27,7 +27,7 @@ thickness = 1 # px
 saturation = 100 # 0 to 100
 brightness = 60 # 0 to 100
 alpha = 100 # 0 to 100
-fade_alpha = 5 # 0 to 255, determines (with fps) the length of trail
+fade_alpha = 4 # 0 to 255, determines (with fps) the length of trail
 
 # proportionality constant in inverse square law
 # force is repulsive for +ve k
