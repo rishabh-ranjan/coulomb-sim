@@ -5,8 +5,6 @@ import time
 import pygame
 
 import config
-import vector
-from vector import Vector
 import particle
 
 def main():

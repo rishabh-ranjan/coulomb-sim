@@ -37,5 +37,5 @@ k_factor = 1
 merge_threshold = 1
 
 # conversion factor from model time to display (real) time (s)
-scale_t2s = 1
+scale_t2s = 5
 
