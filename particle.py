@@ -1,3 +1,5 @@
+# author: Rishabh Ranjan
+
 import sys
 import math
 import random
@@ -9,6 +11,7 @@ import vector
 from vector import Vector
 
 class Particle:
+    k_factor = None
 
     def __init__(self, m, q, r, v):
         self.m = m
@@ -36,15 +39,15 @@ particles = []
 
 def input_particles():
     '''
-    initialize particles from input
-    first line a float representing k_factor
-    for each particle 3 lines of floats:
+    Initialize particles from input.
+    First line a float representing k_factor.
+    For each particle 3 lines of floats:
     m q
     r.x r.y r.z
     v.x v.y v.z
     '''
 
-    config.k_factor = float(input().strip())
+    Particle.k_factor = float(input().strip())
 
     while True:
         try:
@@ -56,7 +59,11 @@ def input_particles():
         
         particles.append(Particle(m, q, r, v))
 
-def handle_collisions():
+def handle_collisions_inelastic():
+    '''
+    Merge particles that come closer than config.merge_threshold.
+    Use physics of ineslastic collision.
+    '''
 
     n = len(particles)
     for i in range(n):
@@ -82,8 +89,13 @@ def handle_collisions():
                 pi.v = (pi.v * pi.m + pj.v * pj.m) / (pi.m + pj.m)
                 pi.m += pj.m
                 pi.q += pj.q
-                for k in range(3):
-                    pi.color[k] = (pi.color[k] + pj.color[k]) // 2
+                hue = (pi.color.hsla[0] * pi.m + pj.color.hsla[0] * pj.m) / (pi.m + pj.m)
+                pi.color.hsla = (hue, config.saturation, config.brightness, config.alpha)
+
+if config.collision_type == 'pass':
+    handle_collisions = lambda: None # empty function
+elif config.collision_type == 'inelastic':
+    handle_collisions = handle_collisions_inelastic
 
 def compute_accs():
 
@@ -107,8 +119,9 @@ def compute_accs():
                 continue
 
             d = vector.dist(pi.r, pj.r)
-            a = (config.k_factor * pi.q * pj.q) / (d * d * pi.m)
-            pi.a += (pi.r - pj.r) * (a / d)
+            if d:
+                a = (Particle.k_factor * pi.q * pj.q) / (d * d * pi.m)
+                pi.a += (pi.r - pj.r) * (a / d)
 
 def update_state(dt):
 
@@ -116,10 +129,12 @@ def update_state(dt):
         if not p.alive:
             continue
         
-        p.v += p.a * dt
+        # order is important
         p.r += p.v * dt
+        p.v += p.a * dt
 
 def draw_state(screen):
 
     for p in particles:
         p.draw(screen)
+

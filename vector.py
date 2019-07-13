@@ -1,3 +1,5 @@
+# author: Rishabh Ranjan
+
 import math
 
 class Vector:
@@ -24,3 +26,4 @@ class Vector:
 
 def dist(u, v):
     return math.sqrt((u.x - v.x) ** 2 + (u.y - v.y) ** 2 + (u.z - v.z) ** 2)
+
