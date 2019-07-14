@@ -129,8 +129,7 @@ def update_state(dt):
         if not p.alive:
             continue
         
-        # order is important
-        p.r += p.v * dt
+        p.r += p.v * dt + p.a * 0.5 * dt * dt
         p.v += p.a * dt
 
 def draw_state(screen):

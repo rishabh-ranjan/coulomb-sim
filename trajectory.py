@@ -9,7 +9,7 @@ import pygame
 import config
 import particle
 
-max_update_disp = 0.01
+max_update_disp = 0.005
 updates_per_draw = int(1 / config.scale_x2px / max_update_disp)
 if updates_per_draw == 0:
     updates_per_draw = 1
