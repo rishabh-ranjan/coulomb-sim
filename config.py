@@ -18,7 +18,7 @@ scale_y2px = screen_height / max_y
 
 # wanted frames per second for drawing
 # less fps gives more accuracy (in simulate.py) but poorer display
-fps = 10
+fps = 50
 
 # default particle properties
 radius = 2 # px
@@ -35,5 +35,5 @@ collision_type = 'inelastic'
 merge_threshold = 1
 
 # conversion factor from model time to display (real) time (s)
-scale_t2s = 5
+scale_t2s = 2
 
